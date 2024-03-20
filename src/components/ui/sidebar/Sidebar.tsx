@@ -1,9 +1,9 @@
 'use client';
 
-import { useUIStore } from "@/store";
-import clsx from "clsx";
 import Link from "next/link";
+import clsx from "clsx";
 import { IoCloseOutline, IoLogInOutline, IoLogOutOutline, IoPeopleOutline, IoPersonOutline, IoSearchOutline, IoShirtOutline, IoTicketOutline } from "react-icons/io5"
+import { useUIStore } from "@/store";
 
 export const Sidebar = () => {
 

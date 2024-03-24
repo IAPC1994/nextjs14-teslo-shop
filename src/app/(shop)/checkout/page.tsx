@@ -1,8 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Title } from '../../../components/ui/title/Title';
 import { initialData } from '@/seed/seed';
-import { QuantitySelector } from '@/components';
+import { Title } from '@/components';
 
 const productInCart = [
   initialData.products[0],

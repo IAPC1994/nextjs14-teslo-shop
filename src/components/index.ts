@@ -10,3 +10,4 @@ export * from "./ui/sidebar/Sidebar";
 export * from "./ui/title/Title";
 export * from "./ui/top-menu/TopMenu";
 export * from './ui/pagination/Pagination';
+export * from './product/stock-label/StockLabel';

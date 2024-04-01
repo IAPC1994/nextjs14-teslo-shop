@@ -1,4 +1,5 @@
 'use client';
+import { useEffect } from 'react';
 import { authenticate } from '@/actions';
 import clsx from 'clsx';
 import Link from 'next/link'
@@ -6,9 +7,14 @@ import { useFormState, useFormStatus } from 'react-dom';
 import { IoInformationOutline } from 'react-icons/io5';
 
 export const LoginForm = () => {
-
     const [errorMessage, dispatch] = useFormState(authenticate, undefined);
-    console.log({ errorMessage });
+
+    useEffect(() => {
+      if( errorMessage === 'Success' ){
+        window.location.replace('/');
+      }
+    }, [ errorMessage ])
+    
 
     return (
         <form action={dispatch} className="flex flex-col">

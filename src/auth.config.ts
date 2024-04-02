@@ -10,6 +10,17 @@ export const authConfig: NextAuthConfig = {
     newUser: '/auth/new-account',
   },
   callbacks: {
+    authorized({ auth, request: { nextUrl } }) {
+      const isLoggedIn = !!auth?.user;
+      const isCheckoutPage = nextUrl.pathname.startsWith('/checkout/address');
+      if (isCheckoutPage) {
+        if (isLoggedIn) return true;
+        return false; // Redirect unauthenticated users to login page
+      } else if (isLoggedIn) {
+        return Response.redirect(new URL('/checkout/address', nextUrl));
+      }
+      return true;
+    },
     jwt({ token, user }){
       if( user ){
         token.data = user;

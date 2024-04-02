@@ -1,10 +1,10 @@
 'use client';
 
-import { login, registerUser } from "@/actions";
-import clsx from "clsx";
+import { useState } from 'react';
 import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useState } from 'react';
+import clsx from "clsx";
+import { login, registerUser } from "@/actions";
 
 interface FormInputs {
     name: string;

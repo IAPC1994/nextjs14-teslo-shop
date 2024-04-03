@@ -6,6 +6,7 @@ import { countries } from './seed-country';
 async function main(){
 
     // await Promise.all([
+    await prisma.userAddress.deleteMany();
     await prisma.user.deleteMany();
     await prisma.country.deleteMany();
 

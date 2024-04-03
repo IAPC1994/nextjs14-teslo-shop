@@ -1,7 +1,21 @@
-import Link from 'next/link';
 import { Title } from '@/components';
+import { AddressForm } from './ui/AddressForm';
+import { getCountries, getUserAddress } from '@/actions';
+import { auth } from '@/auth.config';
 
-export default function AddressPage() {
+export default async function AddressPage() {
+
+  const countries = await getCountries();
+
+  const session = await auth();
+
+  if( !session?.user ){
+    return(
+      <h3 className='text-5xl'> 500 - There is not a user session </h3>
+    )
+  }
+  const userAddress = await getUserAddress( session.user.id ) ?? undefined;
+
   return (
     <div className="flex flex-col sm:justify-center sm:items-center mb-72 px-10 sm:px-0">
 
@@ -9,87 +23,7 @@ export default function AddressPage() {
         
         <Title title="Address" subTitle="Delivery Address" />
 
-        <div className="grid grid-cols-1 gap-2 sm:gap-5 sm:grid-cols-2">
-
-
-          <div className="flex flex-col mb-2">
-            <span>Given name</span>
-            <input 
-              type="text" 
-              className="p-2 border rounded-md bg-gray-200"
-            />
-          </div>
-
-          <div className="flex flex-col mb-2">
-            <span>Surname</span>
-            <input 
-              type="text" 
-              className="p-2 border rounded-md bg-gray-200"
-            />
-          </div>
-
-          <div className="flex flex-col mb-2">
-            <span>Address</span>
-            <input 
-              type="text" 
-              className="p-2 border rounded-md bg-gray-200"
-            />
-          </div>
-
-          <div className="flex flex-col mb-2">
-            <span>Address 2 (optional)</span>
-            <input 
-              type="text" 
-              className="p-2 border rounded-md bg-gray-200"
-            />
-          </div>
-
-
-          <div className="flex flex-col mb-2">
-            <span>Postal Code</span>
-            <input 
-              type="text" 
-              className="p-2 border rounded-md bg-gray-200"
-            />
-          </div>
-
-          <div className="flex flex-col mb-2">
-            <span>City</span>
-            <input 
-              type="text" 
-              className="p-2 border rounded-md bg-gray-200"
-            />
-          </div>
-
-          <div className="flex flex-col mb-2">
-            <span>Country</span>
-            <select 
-              className="p-2 border rounded-md bg-gray-200"
-            >
-              <option value="">[ Choose one ]</option>
-              <option value="CHL">Chile</option>
-              <option value="AUS">Australia</option>
-            </select>
-          </div>
-
-          <div className="flex flex-col mb-2">
-            <span>Phone</span>
-            <input 
-              type="text" 
-              className="p-2 border rounded-md bg-gray-200"
-            />
-          </div>
-
-
-
-          <div className="flex flex-col mb-2 sm:mt-10">
-            <Link 
-              href='/checkout'
-              className="btn-primary flex w-full sm:w-1/2 justify-center ">
-              Next
-            </Link>
-          </div>
-        </div>
+        <AddressForm countries={ countries } userStoredAddress={ userAddress }/>
 
       </div>
     </div>

@@ -46,14 +46,24 @@ export const AddToCart = ({ product, inStock }: Props) => {
                 )
             }
 
-            {/* Size selector */}
-            <SizeSelector selectedSize={size} availableSizes={product.sizes} onSizeChanged={size => setSize(size)} />
+           
 
             {/* Quantity selector */}
-            <QuantitySelector quantity={quantity} onQuantityChanged={quantity => setQuantity(quantity)} inStock={inStock} />
+            {
+                (inStock === 0)
+                    ? <div className='mb-10'><span className='font-bold'>No stock</span></div>
+                    : (
+                        <>
+                            {/* Size selector */}
+                            <SizeSelector selectedSize={size} availableSizes={product.sizes} onSizeChanged={size => setSize(size)} />
+                            <QuantitySelector quantity={quantity} onQuantityChanged={quantity => setQuantity(quantity)} inStock={inStock} />
+                             {/* Button */}
+                            <button className="btn-primary my-5" onClick={addToCart}>Add to cart</button>
+                        </>
+                    )
+            }
 
-            {/* Button */}
-            <button className="btn-primary my-5" onClick={addToCart}>Add to cart</button>
+           
         </>
     )
 }

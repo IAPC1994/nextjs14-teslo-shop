@@ -1,21 +1,22 @@
 'use client';
 
-import { useCartStore } from "@/store";
 import { useEffect, useState } from "react";
-import { currencyFormat } from '../../../../utils/currencyFormat';
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useCartStore } from "@/store";
+import { currencyFormat } from "@/utils";
 
 export const OrderSummary = () => {
 
+    const router = useRouter();
     const [loaded, setLoaded] = useState(false);
     const { itemsInCart, subTotal, tax, total } = useCartStore( state => state.getSummaryInformation() );
 
     useEffect(() => {
       setLoaded( true );
       if( itemsInCart === 0 && loaded ){
-        redirect('/empty');
+        router.replace('/empty');
       }
-    }, [itemsInCart])
+    }, [itemsInCart, loaded, router])
     
     if( !loaded ) return <p>Loading...</p>;
 

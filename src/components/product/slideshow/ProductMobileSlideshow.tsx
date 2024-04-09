@@ -8,6 +8,7 @@ import 'swiper/css/thumbs';
 
 import './slideshow.css';
 import { Autoplay, FreeMode, Pagination} from 'swiper/modules';
+import { ProductImage } from '@/components';
 
 interface Props {
     images: string[];
@@ -34,7 +35,7 @@ export const ProductMobileSliceshow = ({ images, title, className }:Props) => {
           {
             images.map( img => (
               <SwiperSlide key={ img }>
-                <Image src={ `/products/${ img }` } alt={ title } width={ 600 } height={ 500 } className='object-fill' />
+                <ProductImage src={ img } alt={ title } width={ 600 } height={ 500 } className='object-fill' />
               </SwiperSlide>
 
             ))
